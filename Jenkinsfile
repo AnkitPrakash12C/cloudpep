@@ -2,8 +2,10 @@ pipeline {
   agent any
   environment {
     AWS_DEFAULT_REGION = 'us-east-1'
-    ECR_REPO = '<your-aws-account-id>.dkr.ecr.us-east-1.amazonaws.com/flask-app'
+    ECR_REPO = '864899870517.dkr.ecr.us-east-1.amazonaws.com/flask-app'
     IMAGE_TAG = 'latest'
+    AWS_ACCESS_KEY_ID = 'AKIA4SYAMV42TY7VF3GC'
+    AWS_SECRET_ACCESS_KEY = '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'
   }
   stages {
     stage('Checkout') {
@@ -35,11 +37,8 @@ pipeline {
     stage('Terraform Apply') {
       steps {
         dir('terraform') {
-          withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
-                           string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-            sh 'terraform init'
-            sh 'terraform apply -auto-approve -var="app_image=$ECR_REPO:$IMAGE_TAG"'
-          }
+          sh 'terraform init'
+          sh 'terraform apply -auto-approve -var="app_image=$ECR_REPO:$IMAGE_TAG"'
         }
       }
     }
