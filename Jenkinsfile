@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     AWS_DEFAULT_REGION = 'us-east-1'
-    ECR_REPO = '864899870517.dkr.ecr.us-east-1.amazonaws.com/flask-app'
+    ECR_REPO = '123456789012.dkr.ecr.us-east-1.amazonaws.com/flask-app'
     IMAGE_TAG = 'latest'
     AWS_ACCESS_KEY_ID = 'AKIA4SYAMV42TY7VF3GC'
     AWS_SECRET_ACCESS_KEY = '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'
